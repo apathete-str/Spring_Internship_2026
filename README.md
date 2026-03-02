@@ -18,7 +18,6 @@ The final disease focus will be determined after evaluating dataset feasibility 
 ## Objectives
 - Develop deep learning models for disease risk prediction  
 - Introduce controlled noise and outlier conditions  
-- Apply uncertainty estimation techniques (e.g., Bayesian DL, MC Dropout, Deep Ensembles)  
 - Evaluate robustness and calibration under noisy scenarios  
 
 ## Team
