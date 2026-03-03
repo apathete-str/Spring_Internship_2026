@@ -1,6 +1,8 @@
 # Spring_Internship_2026
 # Uncertainty-Aware Disease Risk Prediction
 
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 ## Project Overview
 **Problem Statement:** Uncertainty-Aware Disease Risk Prediction under Noisy and Outlier-Rich Medical Data.
 
