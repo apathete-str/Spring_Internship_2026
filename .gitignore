@@ -10,8 +10,3 @@ __pycache__/
 .venv/
 venv/
 env/
-
-data/interim/*
-!data/interim/.gitkeep
-data/processed/*
-!data/processed/.gitkeep
