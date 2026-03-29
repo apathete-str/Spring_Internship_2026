@@ -7,14 +7,16 @@ This file summarizes the active notebooks in `scripts/`, their outputs, and thei
 - `01_eda_univariate_bivariate.ipynb`
 - `02_outlier_handling.ipynb`
 - `03_preprocessing_pipeline.ipynb`
+- `04_noise_generation_gmm.ipynb`
 
 ## Dependency note
 
-The notebook numbering matches the current filename convention, but the data dependency is:
+The notebook numbering matches the current filename convention, but the actual data dependency is:
 
-1. `03_preprocessing_pipeline.ipynb` creates the cleaned dataset.
+1. `03_preprocessing_pipeline.ipynb` creates the cleaned and robust-scaled datasets.
 2. `02_outlier_handling.ipynb` depends on `data/interim/ILPD_cleaned.csv`.
-3. `01_eda_univariate_bivariate.ipynb` reads the raw dataset and can be run independently for exploratory work.
+3. `04_noise_generation_gmm.ipynb` depends on `data/processed/ILPD_robust_scaled_features.csv`.
+4. `01_eda_univariate_bivariate.ipynb` reads the raw dataset and can be run independently for exploratory work.
 
 ## 1) `01_eda_univariate_bivariate.ipynb`
 
@@ -96,6 +98,27 @@ The notebook numbering matches the current filename convention, but the data dep
 - `data/processed/ILPD_robust_scaled_features.csv`
 - `produced_reports/docs/ILPD_preprocessing_metadata.json`
 - `produced_reports/03_preprocessing_pipeline.html`
+
+---
+
+## 4) `04_noise_generation_gmm.ipynb`
+
+### Workflow
+
+1. Resolve the repo root and load `config/noise_generation.toml`.
+2. Load the robust-scaled dataset from `data/processed/ILPD_robust_scaled_features.csv`.
+3. Group rows by `Result` and `Gender`.
+4. Fit a GMM inside each group and sample synthetic rows.
+5. Add controlled jitter and clip samples to the observed robust-scaled range for stability.
+6. Re-attach grouping columns, add `Synthetic_Flag`, and concatenate original plus synthetic rows.
+7. Persist the augmented dataset and the generation summary.
+8. Export the notebook to HTML.
+
+### Output
+
+- `data/processed/ILPD_robust_scaled_with_gmm_noise.csv`
+- `produced_reports/docs/ILPD_noise_generation_summary.json`
+- `produced_reports/04_noise_generation_gmm.html`
 
 ## Notes
 
