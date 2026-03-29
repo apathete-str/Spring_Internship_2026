@@ -49,17 +49,33 @@ This file summarizes the workflow and outputs of each notebook in `scripts/`.
    - duplicate removal.
 4. Missing-value treatment:
    - `Albumin_and_Globulin_Ratio` imputed using group-wise median by `Gender` + global fallback.
-5. Outlier assessment report:
-   - IQR, Z-score, Modified Z-score counts and percentages (no row deletion).
-6. Clinical capping (winsorization-style) using pre-defined plausible limits.
-7. Robust scaling for model-ready features (`Result` retained unscaled).
-8. Persist datasets and metadata manifest.
+5. Clinical capping (winsorization-style) using pre-defined plausible limits.
+6. Robust scaling for model-ready features (`Result` retained unscaled).
+7. Persist datasets and preprocessing metadata manifest.
 
 ### Output
 - Data artifacts:
   - `data/interim/ILPD_cleaned.csv`
   - `data/processed/ILPD_clinically_capped.csv`
   - `data/processed/ILPD_robust_scaled_features.csv`
-- QA/Governance artifacts:
-  - `produced_reports/docs/ILPD_outlier_report.csv`
+- Governance artifact:
   - `produced_reports/docs/ILPD_preprocessing_metadata.json`
+
+---
+
+## 3) `outlier_handling.ipynb`
+
+### Workflow (compressed)
+1. Load cleaned dataset (`data/interim/ILPD_cleaned.csv`).
+2. Run outlier diagnostics per numeric feature:
+   - IQR,
+   - Z-score,
+   - Modified Z-score.
+3. Generate KDE plots for each numeric feature.
+4. Persist outlier report and KDE figures.
+
+### Output
+- QA report:
+  - `produced_reports/docs/ILPD_outlier_report.csv`
+- KDE figures:
+  - `produced_reports/figures/eda/outliers/kde_<feature>.png`
