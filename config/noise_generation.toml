@@ -1,0 +1,8 @@
+[noise]
+# Percentage of synthetic noise rows to induce relative to original rows
+noise_ratio = 0.2
+
+[gmm]
+n_components = 5
+jitter_scale = 0.02
+random_seed = 42
